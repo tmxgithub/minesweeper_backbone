@@ -1,0 +1,88 @@
+/*
+
+_reset.scss
+=============================
+スタイルリセット
+
+*/
+body, html, div, span, p,
+a, img, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+canvas, footer, header, hgroup, menu, nav, section, summary {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    outline: 0;
+    vertical-align: baseline;
+    //フォントサイズ問題が発生するまではコメントアウト
+    //@include text-size-adjust(none);
+    @include box-sizing(border-box);
+}
+
+body, html {
+    height: 100%;
+}
+
+body, small {
+    font: 12px/1.4 sans-serif;
+}
+
+input, textarea, keygen, select, button, isindex {
+    font: 12px/1.4 sans-serif;
+}
+
+audio {
+    display: block;
+    height: 0;
+}
+
+p {
+    line-height: 1.4;
+}
+
+b {
+    font-weight: normal;
+}
+
+i {
+    display: block;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+
+ol, ul {
+    list-style: none;
+}
+
+//a, a:link, a:visited, a:hover, a:active {
+a {
+    color: #333;
+    @include touch-callout(none);
+    text-decoration: none;
+    cursor: pointer;
+    @include no-highlight;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+}
+
+hr {
+    margin: 0;
+    padding: 0;
+    display: block;
+    border: none;
+    width: 100%;
+    height: 0;
+}

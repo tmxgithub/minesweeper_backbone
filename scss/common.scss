@@ -1,0 +1,27 @@
+/*
+
+Common.scss
+===================
+common.css Prepossessing Files. this file only use @import;
+
+*/
+
+/* Compass */
+@import 'compass/css3/';
+@import 'compass/utilities';
+
+/* Variables */
+@import 'variables/settings';
+
+/* Mixin */
+@import 'mixin/mixin';
+
+/* RESET */
+@import 'reset';
+
+/* Components */
+@import 'components/base/Base'; //import base dir. container, header, footer, main
+@import 'components/animations';
+@import 'components/layout';
+
+

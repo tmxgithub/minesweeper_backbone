@@ -1,0 +1,71 @@
+/*
+
+_layout.scss
+=============================
+layout css
+
+*/
+@-webkit-keyframes anime01 {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 1; }
+}
+@-webkit-keyframes anime02 {
+    0%   { display: none; }
+    50%  { display: block; }
+    100% { display: none; }
+}
+// button style
+input{
+    -webkit-appearance: none;
+    appearance: none;
+}
+.button {
+    margin: 0;
+    padding: 7px 16px;
+    background-color: #459ec7;
+    border-radius: 4px;
+    border: 1px solid #13719c;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    font-family: arial;
+    font-size: 14px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
+    &:hover {
+        background-color: #308cc9;
+    }
+    &:active {
+        position: relative;
+        top: 1px;
+    }
+    &[desabled]{
+        border: 1px solid #767575;
+        background-color: #c6c6c6;
+        color: #939292;
+        text-shadow: none;
+        cursor: default;
+        &:active {
+            position: relative;
+            top: 0;
+        }
+    }
+    &.delete{
+        display: none;
+        margin: 3px;
+        padding: 4px 25px;
+        border: 1px solid #e23d3d;
+        background-color: #e23d3d;
+        color: #fff;
+        text-align: center;
+        // -webkit-animation: anime02 1s ease infinite alternate;
+    }
+}
+
+.container{
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0 20px;
+    background-color: #ebebeb;
+}

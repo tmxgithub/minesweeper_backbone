@@ -1,0 +1,49 @@
+/* Compass Setting */
+@import "compass";
+@import "compass/css3/";
+@import "compass/utilities";
+
+/* text-shadow : @include single-text-shadow*/
+$default-text-shadow-color: #000;
+$default-text-shadow-blur: 4px;
+$default-text-shadow-v-offset: 0;
+
+/* vendor prefix */
+$experimental-support-for-webkit: true;
+$experimental-support-for-mozilla: false;
+$experimental-support-for-opera: false;
+$experimental-support-for-microsoft: false;
+$experimental-support-for-khtml: false;
+
+/* Sengoku Galaxy */
+/* font-color */
+$color-black: #000;
+$color-white: #fff;
+$color-gray: #404040;
+$color-blue: #1200fe;
+$color-navyblue: #064487;
+$color-brown: #310500;
+$color-darkred: #760d0d;
+$color-orange: #ff9600;
+
+/* background-color */
+$bgcolor-smoke: rgba(0,0,0,0.75);
+
+/* images path */
+$image-path: "../img/";
+
+/* font-size */
+$font-size-m: 12px; /* 標準文字サイズ */
+$font-size-s: $font-size-m - 2;
+$font-size-l: $font-size-m + 4;
+$font-size-ll: $font-size-m + 6;
+$font-size-3l: $font-size-m * 2;
+/* semantic font-size */
+$font-size-title: $font-size-l;
+$font-size-subtitle: $font-size-m;
+
+/* z-index */
+$z-index-section: 0;
+$z-index-header: 100;
+$z-index-modal-background: 999;
+$z-index-modal: 1000;

@@ -1,0 +1,205 @@
+/*
+
+mixin
+=========================
+mixins
+
+*/
+
+// flexible boxの実装
+// Android 2.x系のためboxに対応
+//
+@mixin display-flex($justify-content: flex-start, $align-items: flex-start, $flow: row) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-justify-content: $justify-content;
+            justify-content: $justify-content;
+    @if $justify-content == "flex-start" or $justify-content == "flex-end" {
+        -webkit-box-pack: str-slice($justify-content, 6);
+    }
+    @if $justify-content == "space-between" {
+        -webkit-box-pack: justify;
+    }
+
+    -webkit-align-items: $align-items;
+            align-items: $align-items;
+    @if $align-items == "flex-start" or $align-items == "flex-end" {
+        -webkit-box-align: str-slice($align-items, 6);
+    }
+
+    -webkit-flex-flow: $flow;
+    flex-flow: $flow;
+    @if $flow == "column" {
+        -webkit-box-orient: vertical;
+    }
+    @if $flow == "wrap" {
+        -webkit-box-lines: multiple;
+    }
+}
+
+// boxとの互換性を加味してflex-growのみ対応
+// flex-basisは代わりにwidthを利用すること
+@mixin flex-grow($number) {
+    -webkit-box-flex: $number;
+    -webkit-flex-grow: $number;
+            flex-grow: $number;
+}
+
+@mixin no-highlight() {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: none;
+}
+
+@mixin text-size-adjust($value) {
+    -webkit-text-size-adjust: $value;
+    text-size-adjust: $value;
+}
+
+@mixin background-origin($value){
+    -webkit-background-origin: $value;
+    background-origin: $value;
+}
+
+@mixin border-radius($values...) {
+    @if(length($values) == 4) {
+        border-top-left-radius: nth($values, 1);
+        border-top-right-radius: nth($values, 2);
+        border-bottom-right-radius: nth($values, 3);
+        border-bottom-left-radius: nth($values, 4);
+    }
+    @if(length($values) == 1) {
+        border-top-left-radius: $values;
+        border-top-right-radius: $values;
+        border-bottom-right-radius: $values;
+        border-bottom-left-radius: $values;
+    }
+    @if(length($values) == 2 or length($values) == 3) {
+    }
+}
+
+@mixin box-shadow($x: false, $y: false, $blur: false, $color: false) {
+    $value: $x $y $blur $color;
+    -webkit-box-shadow: $value;
+    box-shadow: $value;
+}
+
+// 袋文字作成mixin
+// text-shadowによって袋文字を再現します。Android2.xに対応のため輪郭が若干ぼやけます。
+// $color: 輪郭線の色を指定
+// $value: 輪郭線の太さを指定
+@mixin openface-text-shadow($color: black, $value: 2) {
+    $i: 0;
+    $tx: 0;
+    $ty: 0;
+    $shadow: '';
+    @while $i <= 360 {
+        $x: floor($value * sin($i * pi() / 180));
+        $y: floor($value * cos($i * pi() / 180));
+        @if $tx != $x or $ty != $y {
+            @if $shadow == '' {
+                $shadow: $shadow + $x+'px ' + $y+'px ' + '1px ' + $color;
+            } @else {
+                $shadow: $shadow + ', ' + $x+'px ' + $y+'px ' + '1px ' + $color;
+            }
+        }
+        $tx: $x;
+        $ty: $y;
+        $i: $i + 5;
+    }
+    text-shadow: unquote($shadow);
+}
+
+@mixin border-image($value) {
+    -webkit-border-image: $value;
+    border-image: $value;
+}
+
+@mixin createStyle {
+    content: "";
+    display: block;
+    position:absolute;
+}
+@mixin ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@mixin touch-callout($value) {
+    -webkit-touch-callout: $value;
+    touch-callout: $value;
+}
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin keyframes($name, $webkit: $experimental-support-for-webkit, $official: true) {
+    @if $webkit and $experimental-support-for-webkit {
+        @-webkit-keyframes $name {
+            @content;
+        }
+    }
+    @if $official {
+        @keyframes $name {
+            @content;
+        }
+    }
+}
+
+@function font-size($number, $denominator: 12px) {
+    @if (unit($number) == 'px') {
+        $round: round(($number / $denominator) * 100);
+        @return percentage($round / 100);
+    } @else {
+    //Error
+        @warn '#{$number} is not a number.';
+        @return $number;
+    }
+}
+
+@function relative-length($value, $denominator: 320px) {
+    $value-unit: unit($value);
+    $denominator-unit: unit($denominator);
+    @if $value-unit == 'px' and $denominator-unit == 'px' {
+        @return percentage($value / $denominator);
+    } @else {
+        @warn '#{$value} or #{$denominator} haven\'t unit to pixel';
+        @return $value;
+    }
+}
+
+@mixin sprite-background($name, $type:common, $size:true) {
+    $sprites: sprite-map("ui/sprites-" + $type + "/*.png");
+    $ypos: round(nth(sprite-position($sprites, $name), 2) / 4);
+    background-image: sprite-url($sprites);
+    background-repeat: no-repeat;
+    background-position: 0 $ypos;
+    @if $size{
+        height: image-height(sprite-file($sprites, $name)) / 4;
+        width: image-width(sprite-file($sprites, $name)) / 4;
+    }
+    @if $type == common-2 {
+        @include background-size(94px auto);
+    }
+    @else if $type == tutorial {
+        @include background-size(200px auto);
+    }
+    @else if $type == deck {
+        @include background-size(60px auto);
+    }
+    @else if $type == btn {
+        @include background-size(294px auto);
+    }
+    @else{
+    }
+}

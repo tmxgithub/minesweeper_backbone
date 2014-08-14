@@ -1,0 +1,222 @@
+@charset "UTF-8";
+/*
+
+Common.scss
+===================
+common.css Prepossessing Files. this file only use @import;
+
+*/
+/* Compass */
+/* Variables */
+/* Compass Setting */
+/* text-shadow : @include single-text-shadow*/
+/* vendor prefix */
+/* Sengoku Galaxy */
+/* font-color */
+/* background-color */
+/* images path */
+/* font-size */
+/* 標準文字サイズ */
+/* semantic font-size */
+/* z-index */
+/* Mixin */
+/*
+
+mixin
+=========================
+mixins
+
+*/
+/* RESET */
+/*
+
+_reset.scss
+=============================
+スタイルリセット
+
+*/
+body, html, div, span, p,
+a, img, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+canvas, footer, header, hgroup, menu, nav, section, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  outline: 0;
+  vertical-align: baseline;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+
+body, small {
+  font: 12px/1.4 sans-serif;
+}
+
+input, textarea, keygen, select, button, isindex {
+  font: 12px/1.4 sans-serif;
+}
+
+audio {
+  display: block;
+  height: 0;
+}
+
+p {
+  line-height: 1.4;
+}
+
+b {
+  font-weight: normal;
+}
+
+i {
+  display: block;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a {
+  color: #333;
+  -webkit-touch-callout: none;
+  touch-callout: none;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 14px;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+  display: block;
+  border: none;
+  width: 100%;
+  height: 0;
+}
+
+/* Components */
+/*
+
+Base.scss
+===================
+this file only use @include;
+base dir components.
+
+*/
+/*
+
+_animations.scss
+=============================
+animation css
+
+*/
+@-webkit-keyframes animation01 {}
+/*
+
+_layout.scss
+=============================
+layout css
+
+*/
+@-webkit-keyframes anime01 {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes anime02 {
+  0% {
+    display: none;
+  }
+
+  50% {
+    display: block;
+  }
+
+  100% {
+    display: none;
+  }
+}
+input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.button {
+  margin: 0;
+  padding: 7px 16px;
+  background-color: #459ec7;
+  border-radius: 4px;
+  border: 1px solid #13719c;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-family: arial;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2f6627;
+}
+.button:hover {
+  background-color: #308cc9;
+}
+.button:active {
+  position: relative;
+  top: 1px;
+}
+.button[desabled] {
+  border: 1px solid #767575;
+  background-color: #c6c6c6;
+  color: #939292;
+  text-shadow: none;
+  cursor: default;
+}
+.button[desabled]:active {
+  position: relative;
+  top: 0;
+}
+.button.delete {
+  display: none;
+  margin: 3px;
+  padding: 4px 25px;
+  border: 1px solid #e23d3d;
+  background-color: #e23d3d;
+  color: #fff;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 20px;
+  background-color: #ebebeb;
+}
