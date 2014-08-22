@@ -16,10 +16,6 @@ layout css
     100% { display: none; }
 }
 // button style
-input{
-    -webkit-appearance: none;
-    appearance: none;
-}
 .button {
     margin: 0;
     padding: 7px 16px;
@@ -36,10 +32,6 @@ input{
     &:hover {
         background-color: #308cc9;
     }
-    &:active {
-        position: relative;
-        top: 1px;
-    }
     &[desabled]{
         border: 1px solid #767575;
         background-color: #c6c6c6;
@@ -51,21 +43,237 @@ input{
             top: 0;
         }
     }
-    &.delete{
-        display: none;
-        margin: 3px;
-        padding: 4px 25px;
-        border: 1px solid #e23d3d;
-        background-color: #e23d3d;
-        color: #fff;
-        text-align: center;
-        // -webkit-animation: anime02 1s ease infinite alternate;
-    }
 }
 
 .container{
+    position: relative;
     width: 100%;
+    height: 480px;
     margin: 0 auto;
     padding: 0 0 20px;
-    background-color: #ebebeb;
+    background-color: #343838;
+    .modal{
+        display: table;
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        z-index: 999;
+        margin-left: -150px;
+        width: 300px;
+        height: 102px;
+        border: 4px solid #008C9E;
+        border-radius: 8px;
+        background-color: #eff7f8;
+        .text{
+            display: table-cell;
+            vertical-align: middle;
+            color: #333;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    }
+}
+.opening{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: #4e8c94;
+    .start_button{
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        width: 120px;
+        height: 44px;
+        margin-left: -60px;
+        border: 1px solid #173940;
+        border-radius: 10px;
+        background-color: #00b4cc;
+        line-height: 44px;
+        text-align: center;
+        font-size: 18px;
+        color: #fff;
+    }
+}
+.header{
+    position: relative;
+    // display: table;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #008C9E;
+    background-color: #005F6B;
+    text-align: center;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+    .column{
+        display: table;
+        width: 100%;
+        >li{
+            display: table-cell;
+            width: 50%;
+            &:last-child{
+                text-align: right;
+            }
+        }
+    }
+    .reload{
+        width: 24px;
+        height: 29px;
+        background: url(../img/reload.png) no-repeat 0 0;
+        @include background-size(cover);
+    }
+    .time{
+        position: relative;
+        display: inline-block;
+        // float: right;
+        width: 52px;
+        text-align: right;
+        color: white;
+        font-size: 18px;
+        line-height: 28px;
+        vertical-align: 6px;
+    }
+    .time_icon{
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url(../img/clock.png) no-repeat 0 0;
+        @include background-size(cover);
+    }
+}
+#board{
+    position: relative;
+    &.booooomb::before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 296px;
+        height: 296px;
+        background: url(../img/bombkumo.png) no-repeat 0 0;
+        @include background-size(cover);
+    }
+    width: 296px;
+    height: 296px;
+    margin: 0 auto;
+    border-left: 4px solid #148398;
+    border-top: 4px solid #148398;
+    border-right: 4px solid #59cce2;
+    border-bottom: 4px solid #59cce2;
+    background-color: #eff7f8;
+    // background: url(../img/main_bg.jpg) no-repeat 0 0;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+    b{
+        display: block;
+        position: relative;
+        float: left;
+        width: 32px;
+        height: 32px;
+        border-right: 1px solid #1c535a;
+        border-bottom: 1px solid #1c535a;
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        line-height: 33px;
+        text-shadow: 1px 1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, -1px -1px 1px #000, 1px 0px 1px #000, -1px 0px 1px #000, 0px -1px 1px #000, 0px 1px 1px #000;
+            // content: "";
+            // display: block;
+            // position: absolute;
+            // top: 0;
+            // left: 0;
+            // z-index: 2;
+            width: 32px;
+            height: 32px;
+            background: url(../img/closed.jpg) no-repeat 0 0;
+            @include background-size(cover);
+        &.opened{
+            position: relative;
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: none;
+            &.tapped::after{
+                width: 32px;
+                height: 32px;
+                background: none;
+            }
+        }
+        &.bomb{
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: url(../img/bomb.png) no-repeat 1px -1px;
+            @include background-size(cover);
+        }
+    }
+}
+.status{
+    width: 24%;
+    margin: 8px auto;
+    padding: 4px;
+    border-left: 4px solid #148398;
+    border-top: 4px solid #148398;
+    border-right: 4px solid #59cce2;
+    border-bottom: 4px solid #59cce2;
+    background-color: #eff7f8;
+    .bomb_num{
+        color: #555;
+        font-size: 16px;
+        .num{
+            display: inline-block;
+            vertical-align: 6px;
+            font-weight: normal;
+        }
+    }
+}
+#controls{
+    width: 296px;
+    margin: 0 auto;
+    padding: 10px;
+    .new_game{
+        display: block;
+        width: 120px;
+        margin: 0 auto;
+    }
+}
+.closed_button{
+    position:relative;
+    display:block;
+    width:40px;
+    height:40px;
+    border-radius:50px;
+    border:4px solid #333;
+    &::after,&::before{
+        display:block;
+        content:'';
+        position:absolute;
+        top:12.5px;
+        left:4px;
+        height:6px;
+        width:24px;
+        background:#333;
+        border-radius:10px;
+        transform:rotate(-45deg);
+        -webkit-transform:rotate(-45deg);
+    }
+    &::after{
+        transform:rotate(45deg);
+        -webkit-transform:rotate(45deg);
+    }
 }
