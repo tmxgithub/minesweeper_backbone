@@ -133,9 +133,6 @@
         reveal: function(){
             this.model.reveal();
         },
-        clear: function(){
-            this.model.clear();
-        },
     });
 
     // var TimeStatusView = Backbone.View.extend({
@@ -179,7 +176,6 @@
         initialize: function(){
             Cells.bind('all', this.render, this);
             Cells.bind('reset', this.reset, this);
-            this.grid = $('#board');
             this.addAll();
             this.render();
         },
@@ -197,8 +193,8 @@
             Cells.reset( Cells.defaults() );
         },
         addCell: function(cell) {
-            var view = new CellView({model: cell});
-            this.$('#board').append(view.render().el);
+            var cellView = new CellView({model: cell});
+            this.$('#board').append(cellView.render().el);
         },
         addRow: function(row) {
             _.each(Cells.row(row), this.addCell);
