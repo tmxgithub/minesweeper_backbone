@@ -1,26 +1,36 @@
 (function(){
-
+//? あとで追記
     var Cell = Backbone.Model.extend({
+        // セルのデフォルト設定：爆弾・セル開けたか・バリュー
         defaults: {
             isMine: false,
             isOpend: false,
             value: 0,
         },
-        inc: function(){
+        // セルのModelの属性値を設定
+        setValue: function(){
             this.set({value: this.get('value') + 1});
         },
+        // セルを開けた時の設定
         reveal: function(){
+            // isOpen trueをset
             this.set({isOpend: true});
+            // もしisMine trueならvalidateする
             if (this.get('isMine')) {
                 return Cells.validate();
             }
+            //  もしvalueなければ
             if (!this.get('value')) {
+                // feighbors近隣設定をgetして
                 _.each(this.get('neighbors'), function(cell) {
+                    // もしisOpen falseかつisMine falseなら
                     if (!cell.get('isOpend') && !cell.get('isMine')) {
+                        // //? revealする
                         cell.reveal();
                     }
                 });
             }
+            // isOpendされてるセル数とisMineされてるセル数が同じならvalidateしる
             if (Cells.remaining().length == Cells.isMine().length) { Cells.validate(); }
         },
     });
@@ -53,6 +63,7 @@
                         }
                     }
                     cells[x][y].set({neighbors: neighbors});
+                    console.log(cells[dx]);
                 }
             }
             var mines = this.mines;
@@ -62,7 +73,7 @@
 
                 if (!cells[x][y].get('isMine')) {
                     cells[x][y].set({isMine: true});
-                    _.each(cells[x][y].get('neighbors'), function(cell) { cell.inc() });
+                    _.each(cells[x][y].get('neighbors'), function(cell) { cell.setValue() });
                     mines--;
                 }
             }
@@ -75,9 +86,11 @@
         initialize: function(){
             this.add(this.defaults());
         },
+        // セルのisOpendをgetしてそれ以外を除外
         isOpend: function(){
             return this.filter(function(cell) {return cell.get('isOpend');});
         },
+        // 空いたセルにisOpend実行
         remaining: function(){
             return this.without.apply(this, this.isOpend());
         },
@@ -121,6 +134,7 @@
             'click': 'reveal',
         },
         initialize: function(){
+            // オブザーバパターンを利用してモデルのイベントを購読
             this.model.bind('change', this.render, this);
         },
         render: function(){
