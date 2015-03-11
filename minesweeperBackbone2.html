@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=320,initial-scale=1,user-scalable=no,target-densitydpi=medium-dpi,maximum-scale=1,minimum-scale=1">
+<title>Minesweeper - Backbone.js</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <ul class="column">
+            <li><div class="reload" onclick="location.reload()"></div></li>
+            <li>
+                <i class="time_icon"></i>
+                <div id="time" class="time">00:00</div>
+            </li>
+        </ul>
+    </header>
+    <div id="board">
+        <b class=""></b>
+        <b class="opened"></b>
+        <b class="opened bomb"></b>
+    </div>
+    <div class="status">
+        <div class="bomb_num"><b class="bomb"></b><i class="num">10</i></div>
+    </div>
+    <div class="opening" style="display: none;">
+        <div class="start_button">スタート</div>
+    </div>
+    <script type="text/template" id="">
+    </script>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/minesweeper_backbone2.js"></script>
+</body>
+</html>
